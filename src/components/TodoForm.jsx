@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiAlertCircle } from "react-icons/fi"; // Uyarı ikonu (FiAlertCircle) eklendi
 
 const TodoForm = ({ addTodo }) => {
-  // Yeni eklenecek görevin verilerini tutan state
   const [formData, setFormData] = useState({
     title: "",
     priority: "medium",
@@ -12,30 +11,41 @@ const TodoForm = ({ addTodo }) => {
     status: "pending",
   });
 
-  // Kullanıcı forma yazı yazdığında state'i günceller
+  // --- YENİ EKLENEN KISIM: Hata Mesajı Hafızası ---
+  const [error, setError] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Süre girişlerinde hatalı değerleri engelle
     if (name === "hours" || name === "minutes") {
-      if (Number(value) < 0) return; // Negatif giriş yapılamaz
-      if (name === "minutes" && Number(value) > 59) return; // Dakika 59'u geçemez
+      if (Number(value) < 0) return;
+      if (name === "minutes" && Number(value) > 59) return;
     }
 
     setFormData((prev) => ({ ...prev, [name]: value }));
+    
+    // Kullanıcı bir şeyler yazmaya/değiştirmeye başladığında eski hatayı ekrandan sil
+    if (error) setError("");
   };
 
-  // Form gönderildiğinde (Görev Ekle butonuna basıldığında) çalışır
   const handleSubmit = (e) => {
-    e.preventDefault(); // Sayfanın yenilenmesini engeller
+    e.preventDefault();
 
-    // Sadece boşluk girilmişse veya isim boşsa işlemi iptal et
-    if (!formData.title.trim()) return;
+    // 1. KONTROL: Görev ismi boş mu?
+    if (!formData.title.trim()) {
+      setError("Lütfen bir görev ismi giriniz.");
+      return; // İşlemi burada durdur
+    }
 
-    // Saat ve dakikayı toplam dakika cinsine çevir (Boş bırakılmışsa 0 kabul et)
     const totalMinutes = (Number(formData.hours) || 0) * 60 + (Number(formData.minutes) || 0);
 
-    // Üst bileşene (Home.jsx) veriyi gönder
+    // 2. KONTROL: Süre 0 mı?
+    if (totalMinutes === 0) {
+      setError("Lütfen görev için bir süre (saat veya dakika) belirleyiniz.");
+      return; // İşlemi burada durdur
+    }
+
+    // Sorun yoksa görevi ekle
     addTodo({
       title: formData.title,
       priority: formData.priority,
@@ -44,7 +54,7 @@ const TodoForm = ({ addTodo }) => {
       status: formData.status,
     });
 
-    // İşlem bitince formu temizle (Varsayılan ayarlara döndür)
+    // Formu temizle ve hatayı sıfırla
     setFormData({
       title: "",
       priority: "medium",
@@ -53,9 +63,9 @@ const TodoForm = ({ addTodo }) => {
       category: "Yazılım",
       status: "pending",
     });
+    setError(""); // Başarılı eklemeden sonra hatayı temizle
   };
 
-  // Ortak input CSS sınıfları (Dark mode destekli)
   const inputStyles = "border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors placeholder-gray-400 dark:placeholder-gray-400";
 
   return (
@@ -71,14 +81,12 @@ const TodoForm = ({ addTodo }) => {
       />
 
       <div className="flex gap-2">
-        {/* Öncelik Seçimi */}
         <select name="priority" value={formData.priority} onChange={handleChange} className={`w-1/3 ${inputStyles}`}>
           <option value="low">Düşük</option>
           <option value="medium">Orta</option>
           <option value="high">Yüksek</option>
         </select>
 
-        {/* Saat Girişi */}
         <input
           type="number"
           name="hours"
@@ -89,7 +97,6 @@ const TodoForm = ({ addTodo }) => {
           className={`w-1/3 ${inputStyles}`}
         />
 
-        {/* Dakika Girişi */}
         <input
           type="number"
           name="minutes"
@@ -102,14 +109,28 @@ const TodoForm = ({ addTodo }) => {
         />
       </div>
 
-      {/* Kategori Seçimi */}
-      <select name="category" value={formData.category} onChange={handleChange} className={`w-full ${inputStyles}`}>
-        <option>Yazılım</option>
-        <option>Ders</option>
-        <option>Ev-Market Alışverişi</option>
-        <option>İş</option>
-        <option>Diğer</option>
-      </select>
+      <div className="flex gap-2">
+        <select name="category" value={formData.category} onChange={handleChange} className={`w-1/2 ${inputStyles}`}>
+          <option>Yazılım</option>
+          <option>Ders</option>
+          <option>Ev-Market Alışverişi</option>
+          <option>İş</option>
+          <option>Diğer</option>
+        </select>
+
+        <select name="status" value={formData.status} onChange={handleChange} className={`w-1/2 ${inputStyles}`}>
+          <option value="pending">Yapılacak</option>
+          <option value="completed">Yapıldı</option>
+        </select>
+      </div>
+
+      {/* Hata Varsa Ekranda Göster --- */}
+      {error && (
+        <div className="flex items-center gap-1.5 text-red-500 dark:text-red-400 text-sm font-medium animate-pulse">
+          <FiAlertCircle className="text-lg" />
+          <span>{error}</span>
+        </div>
+      )}
 
       {/* Gönder Butonu */}
       <button
