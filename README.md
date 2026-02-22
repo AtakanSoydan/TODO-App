@@ -27,8 +27,7 @@ Bu proje, günlük görevleri takip etmek ve yönetmek için geliştirilmiş mod
 *Liste Altındaki Dashboard Görünümü:*
 ![Dashboard](./screenshots/Dashboard.png)
 
-
-## Kurulum ve Çalıştırma
+## 🛠️ Kurulum ve Çalıştırma
 
 ### Gereksinimler
 * Node.js ve npm
@@ -37,8 +36,8 @@ Bu proje, günlük görevleri takip etmek ve yönetmek için geliştirilmiş mod
 
 1. **Projeyi bilgisayarınıza indirin (Klonlayın):**
    ```bash
-    git clone [https://github.com/AtakanSoydan/TODO-App.git](https://github.com/AtakanSoydan/TODO-App.git)
-    cd TODO-App
+   git clone https://github.com/AtakanSoydan/TODO-App.git
+   cd TODO-App
    ```
 
 2. **Proje bağımlılıklarını yükleyin:**
