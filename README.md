@@ -7,6 +7,7 @@ Bu proje, günlük görevleri takip etmek ve yönetmek için geliştirilmiş mod
 * **İstatistik Paneli:** Tamamlanan görevler, harcanan süre ve en çok kullanılan kategoriyi gösteren dinamik dashboard.
 * **Gelişmiş Filtreleme:** Görevleri öncelik, durum veya kategoriye göre filtreleme ve sıralama.
 * **Kalıcı Hafıza:** Veriler tarayıcının yerel hafızasında (Local Storage) tutulur, sayfa yenilense de kaybolmaz.
+* **CRUD İşlemleri:** Kullanıcıdan alınan veriler ile basit CRUD işlemleri yapılır.
 
 ## 🚀 Kullanılan Teknolojiler
 * React (Vite)
@@ -16,7 +17,10 @@ Bu proje, günlük görevleri takip etmek ve yönetmek için geliştirilmiş mod
 ## 📸 Ekran Görüntüleri
 
 *Aydınlık Mod Görünümü:*
-![Aydınlık Mod](./screenshots/light-mode.png)
+![Aydınlık Mod](./screenshots/AydınlıkTema.png)
 
 *Karanlık Mod Görünümü:*
-![Karanlık Mod](./screenshots/dark-mode.png)
+![Karanlık Mod](./screenshots/KaranlıkTema.png)
+
+*Liste Altındaki Dashboard Görünümü:*
+![Karanlık Mod](./screenshots/Dashboard.png)
