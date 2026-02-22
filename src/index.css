@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* Koyu temayı manuel 'class' stratejisi ile kontrol etmek için */
+@custom-variant dark (&:where(.dark, .dark *));
