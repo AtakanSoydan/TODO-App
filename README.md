@@ -2,6 +2,8 @@
 
 Bu proje, günlük görevleri takip etmek ve yönetmek için geliştirilmiş modern ve duyarlı (responsive) bir web uygulamasıdır. 
 
+**[Uygulamayı Canlı Olarak İncelemek İçin Tıklayın](https://atakan-todo-app.netlify.app)**
+
 ## ✨ Özellikler
 * **Karanlık Mod (Dark Mode):** Tek tuşla aydınlık ve karanlık tema arası geçiş.
 * **İstatistik Paneli:** Tamamlanan görevler, harcanan süre ve en çok kullanılan kategoriyi gösteren dinamik dashboard.
@@ -23,4 +25,30 @@ Bu proje, günlük görevleri takip etmek ve yönetmek için geliştirilmiş mod
 ![Karanlık Mod](./screenshots/KaranlıkTema.png)
 
 *Liste Altındaki Dashboard Görünümü:*
-![Karanlık Mod](./screenshots/Dashboard.png)
+![Dashboard](./screenshots/Dashboard.png)
+
+
+## Kurulum ve Çalıştırma
+
+### Gereksinimler
+* Node.js ve npm
+
+### Adımlar
+
+1. **Projeyi bilgisayarınıza indirin (Klonlayın):**
+   ```bash
+    git clone [https://github.com/AtakanSoydan/TODO-App.git](https://github.com/AtakanSoydan/TODO-App.git)
+    cd TODO-App
+   ```
+
+2. **Proje bağımlılıklarını yükleyin:**
+   ```bash
+   npm install
+   ```
+
+3. **Geliştirme sunucusunu başlatın:**
+   ```bash
+   npm run dev
+   ```
+
+Tarayıcınızda http://localhost:5173 adresine giderek projeyi canlı olarak görüntüleyebilir ve geliştirmeye başlayabilirsiniz.
